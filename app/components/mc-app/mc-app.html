@@ -1,0 +1,66 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../mc-home/mc-home.html">
+<link rel="import" href="../mc-setup/mc-setup.html">
+<link rel="import" href="../mc-game/mc-game.html">
+<link rel="import" href="../mc-player/mc-player.html">
+
+<polymer-element name="mc-app">
+    <template>
+        <style>
+            core-animated-pages,
+            section,
+            section > * {
+                height: 100%;
+            }
+        </style>
+
+        <core-animated-pages id="pages" transitions="hero-transition cross-fade cross-fade-delayed" selected="game">
+            <!-- <section name="home">
+                <mc-home layout vertical></mc-home>
+            </section>
+            <section id="setup">
+                <mc-setup layout vertical></mc-setup>
+            </section> -->
+            <mc-game name="game" players={{players}} player="{{player}}"></mc-game>
+            <mc-player name="player" player="{{player}}"></mc-player>
+        </core-animated-pages>
+    </template>
+
+    <script>
+        Polymer({
+            players: [
+                {
+                    name: 'Kyle',
+                    color: '#cc0000'
+                },
+                {
+                    name: 'Kristy',
+                    color: 'green'
+                },
+                {
+                    name: 'Cyrus',
+                    color: '#0854C7'
+                },
+                {
+                    name: 'Ramona',
+                    color: 'Purple'
+                }
+            ],
+
+            eventDelegates: {
+                'main': function () {
+                    this.$.pages.selected = 'game';
+                }
+            },
+
+            playerChanged: function () {
+                if (this.player) {
+                    this.$.pages.selected = 'player';
+                } else {
+                    this.$.pages.selected = 'game';
+                }
+            }
+        });
+    </script>
+</polymer-element>
