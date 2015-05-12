@@ -22,7 +22,7 @@
             <section id="setup">
                 <mc-setup layout vertical></mc-setup>
             </section> -->
-            <mc-game name="game" players={{players}} player="{{player}}"></mc-game>
+            <mc-game name="game" players={{players}} player="{{player}}" on-core-activate="{{playerChanged}}"></mc-game>
             <mc-player name="player" player="{{player}}"></mc-player>
         </core-animated-pages>
     </template>
