@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../bower_components/font-roboto/roboto.html">
 <link rel="import" href="../mc-home/mc-home.html">
 <link rel="import" href="../mc-setup/mc-setup.html">
 <link rel="import" href="../mc-game/mc-game.html">
@@ -8,11 +9,13 @@
 <polymer-element name="mc-app">
     <template>
         <style>
+
             core-animated-pages,
             section,
             section > * {
                 height: 100%;
             }
+            
         </style>
 
         <core-animated-pages id="pages" transitions="hero-transition cross-fade cross-fade-delayed" selected="game">
@@ -32,19 +35,23 @@
             players: [
                 {
                     name: 'Kyle',
-                    color: '#cc0000'
+                    color: '#cc0000',
+                    level: 1
                 },
                 {
                     name: 'Kristy',
-                    color: 'green'
+                    color: 'green',
+                    level: 1
                 },
                 {
                     name: 'Cyrus',
-                    color: '#0854C7'
+                    color: '#0854C7',
+                    level: 1
                 },
                 {
                     name: 'Ramona',
-                    color: 'Purple'
+                    color: 'Purple',
+                    level: 1
                 }
             ],
 

@@ -20,19 +20,30 @@
                 width: 100px;
                 height: 100px;
                 border-radius: 50%;
-                border: 3px solid white;
+                border: 5px solid white;
             }
+
+            .level {
+                font-size: 60px;
+                font-weight: 100;
+            }
+
 
             paper-icon-button {
                 position: absolute;
-                top: 20px;
-                left: 20px;
+                top: 16px;
+                left: 16px;
             }
         </style>
 
         <div class="player" hero hero-id="punch" style="background-color: {{player.color}}" fit layout vertical center center-justified>
             <h1>{{player.name}}</h1>
-            <div class="avatar"></div>
+            <div layout horizontal center>
+                <h1 cross-fade-delayed on-tap={{decreaseLevel}}><</h1>
+                <div class="avatar"></div>
+                <h1 cross-fade-delayed on-tap="{{increaseLevel}}">></h1>
+            </div>
+            <h1 class="level" cross-fade-delayed>{{player.level}}</h1>
             <paper-icon-button icon="arrow-back" cross-fade-delayed on-tap="{{goBack}}"></paper-icon-button>
         </div>
     </template>
@@ -41,6 +52,19 @@
         Polymer({
             goBack: function () {
                 this.fire('main');
+            },
+
+            decreaseLevel: function (event) {
+                var player = event.target.templateInstance.model.player;
+
+                if (player.level > 1) {
+                    player.level -= 1;
+                }
+            },
+
+            increaseLevel: function (event) {
+                var player = event.target.templateInstance.model.player;
+                player.level += 1;
             }
         });
     </script>
