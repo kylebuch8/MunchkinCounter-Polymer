@@ -1,0 +1,23 @@
+{
+  "name": "MunchkinCounter-Polymer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kylebuch8/MunchkinCounter-Polymer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kylebuch8/MunchkinCounter-Polymer/issues"
+  },
+  "homepage": "https://github.com/kylebuch8/MunchkinCounter-Polymer",
+  "devDependencies": {
+    "browser-sync": "^2.7.1",
+    "gulp": "^3.8.11"
+  }
+}
