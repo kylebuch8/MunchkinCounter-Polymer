@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 
 <polymer-element name="mc-game" attributes="players player" layout vertical>
     <template>
@@ -27,8 +28,10 @@
             }
         </style>
 
+        <firebase-element id="base" location="https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0" data="{{game}}" keys="{{keys}}"></firebase-element>
+
         <core-selector selected="{{selected}}" fit layout horizontal>
-            <template repeat="{{play, i in players}}">
+            <template repeat="{{play, i in game['players']}}">
                 <div class="player" hero-id="{{player.name === play.name ? 'punch' : ''}}" hero?="{{player.name === play.name}}" style="background-color: {{play.color}}" flex layout vertical center center-justified>
                     <h1>{{play.name}}</h1>
                     <div class="avatar"></div>
