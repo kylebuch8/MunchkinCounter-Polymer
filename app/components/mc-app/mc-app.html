@@ -15,7 +15,7 @@
             section > * {
                 height: 100%;
             }
-            
+
         </style>
 
         <core-animated-pages id="pages" transitions="hero-transition cross-fade cross-fade-delayed" selected="game">
@@ -25,8 +25,8 @@
             <section id="setup">
                 <mc-setup layout vertical></mc-setup>
             </section> -->
-            <mc-game name="game" players={{players}} player="{{player}}" on-core-activate="{{playerChanged}}"></mc-game>
-            <mc-player name="player" player="{{player}}"></mc-player>
+            <mc-game name="game" players={{players}} player="{{player}}" playerId="{{playerId}}" on-core-activate="{{playerChanged}}"></mc-game>
+            <mc-player name="player" player="{{player}}" playerId="{{playerId}}"></mc-player>
         </core-animated-pages>
     </template>
 

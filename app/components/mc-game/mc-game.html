@@ -2,7 +2,7 @@
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="mc-game" attributes="players player" layout vertical>
+<polymer-element name="mc-game" attributes="players player playerId" layout vertical>
     <template>
         <style>
             :host {
@@ -44,7 +44,8 @@
     <script>
         Polymer({
             selectedChanged: function () {
-                this.player = this.players[this.selected];
+                this.player = this.game.players[this.selected];
+                this.playerId = this.selected;
             }
         });
     </script>
