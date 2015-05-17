@@ -28,14 +28,14 @@
             }
         </style>
 
-        <firebase-element id="base" location="https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0" data="{{game}}" keys="{{keys}}"></firebase-element>
+        <firebase-element id="base" location="https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0" data="{{game}}"></firebase-element>
 
-        <core-selector selected="{{selected}}" fit layout horizontal>
-            <template repeat="{{play, i in game['players']}}">
-                <div class="player" hero-id="{{player.name === play.name ? 'punch' : ''}}" hero?="{{player.name === play.name}}" style="background-color: {{play.color}}" flex layout vertical center center-justified>
-                    <h1>{{play.name}}</h1>
+        <core-selector on-core-select="{{playerSelected}}" fit layout horizontal>
+            <template repeat="{{key in keys(game.players)}}">
+                <div class="player" hero-id="{{player.name === game.players[key].name ? 'punch' : ''}}" hero?="{{player.name === game.players[key].name}}" style="background-color: {{game.players[key].color}}" flex layout vertical center center-justified>
+                    <h1>{{game.players[key].name}}</h1>
                     <div class="avatar"></div>
-                    <h1 class="level">{{play.level}}</h1>
+                    <h1 class="level">{{game.players[key].level}}</h1>
                 </div>
             </template>
         </core-selector>
@@ -43,9 +43,19 @@
 
     <script>
         Polymer({
-            selectedChanged: function () {
-                this.player = this.game.players[this.selected];
-                this.playerId = this.selected;
+            keys: function (input) {
+                if (input) {
+                    return Object.keys(input);
+                }
+            },
+
+            playerSelected: function (event) {
+                if (event.detail.isSelected) {
+                    var key = event.detail.item.templateInstance.model.key;
+
+                    this.player = this.game.players[key];
+                    this.playerId = key;
+                }
             }
         });
     </script>
