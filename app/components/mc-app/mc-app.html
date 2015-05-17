@@ -21,10 +21,8 @@
         <core-animated-pages id="pages" transitions="hero-transition cross-fade cross-fade-delayed" selected="game">
             <!-- <section name="home">
                 <mc-home layout vertical></mc-home>
-            </section>
-            <section id="setup">
-                <mc-setup layout vertical></mc-setup>
-            </section> -->
+            </section>-->
+            <mc-setup name="setup"></mc-setup>
             <mc-game name="game" players={{players}} player="{{player}}" playerId="{{playerId}}" on-core-activate="{{playerChanged}}"></mc-game>
             <mc-player name="player" player="{{player}}" playerId="{{playerId}}"></mc-player>
         </core-animated-pages>
