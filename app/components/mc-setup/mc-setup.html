@@ -1,19 +1,93 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 
 <polymer-element name="mc-setup">
     <template>
         <style>
-            :host {
-                background-color: blue;
-            }
+
         </style>
 
+        <firebase-element location="https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0" data="{{game}}"></firebase-element>
+
         <h1>Setup</h1>
+        <input type="text" name="name" value="{{name}}"><button on-tap="{{addPlayer}}">Add</button>
+        <ul>
+            <template repeat="{{key in keys(game.players)}}">
+                <li>
+                    {{game.players[key].name}} <button on-tap="{{removePlayer}}">X</button>
+                    <div>
+                        Color:
+                        <paper-radio-group on-core-select="{{updateColor}}" selected="{{game.players[key].color}}">
+                            <paper-radio-button name="#cc0000" label="Red"></paper-radio-button>
+                            <paper-radio-button name="green" label="Green"></paper-radio-button>
+                            <paper-radio-button name="purple" label="Purple"></paper-radio-button>
+                            <paper-radio-button name="orange" label="Orange"></paper-radio-button>
+                            <paper-radio-button name="#0854C7" label="Blue"></paper-radio-button>
+                            <paper-radio-button name="#ffcc00" label="Yellow"></paper-radio-button>
+                        </paper-radio-group>
+                    </div>
+                    <div>
+                        Gender:
+                        <paper-radio-group on-core-select="{{updateGender}}" selected="{{game.players[key].gender}}">
+                            <paper-radio-button name="male" label="Male"></paper-radio-button>
+                            <paper-radio-button name="female" label="Female"></paper-radio-button>
+                        </paper-radio-group>
+                    </div>
+                </li>
+            </template>
+        </ul>
     </template>
 
     <script>
         Polymer({
+            keys: function (input) {
+                if (input) {
+                    return Object.keys(input);
+                }
+            },
 
+            addPlayer: function () {
+                var player = {
+                        name: this.name,
+                        level: 1
+                    },
+                    playersRef = new Firebase('https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/');
+
+                playersRef.push(player);
+
+                this.name = '';
+            },
+
+            removePlayer: function (event) {
+                var key = event.target.templateInstance.model.key,
+                    playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/' + key);
+
+                playerRef.remove();
+            },
+
+            updateColor: function (event) {
+                if (event.detail.isSelected) {
+                    var key = event.target.templateInstance.model.key,
+                        playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/' + key);
+
+                    playerRef.update({
+                        color: event.target.selected
+                    });
+                }
+            },
+
+            updateGender: function (event) {
+                if (event.detail.isSelected) {
+                    var key = event.target.templateInstance.model.key,
+                        playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/' + key);
+
+                    playerRef.update({
+                        gender: event.target.selected
+                    });
+                }
+            }
         });
     </script>
 </polymer-element>
