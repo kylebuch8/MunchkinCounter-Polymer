@@ -1,15 +1,16 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-signals/core-signals.html">
 <link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
 <link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="mc-setup">
+<polymer-element name="mc-setup" attributes="gameId">
     <template>
         <style>
 
         </style>
 
-        <firebase-element location="https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0" data="{{game}}"></firebase-element>
+        <firebase-element location="https://munchkincounter.firebaseio.com/games/{{gameId}}" data="{{game}}"></firebase-element>
 
         <h1>Setup</h1>
         <input type="text" name="name" value="{{name}}"><button on-tap="{{addPlayer}}">Add</button>
@@ -38,6 +39,8 @@
                 </li>
             </template>
         </ul>
+
+        <button on-tap="{{goToGame}}">Play</button>
     </template>
 
     <script>
@@ -87,6 +90,10 @@
                         gender: event.target.selected
                     });
                 }
+            },
+
+            goToGame: function () {
+                this.fire('main');
             }
         });
     </script>

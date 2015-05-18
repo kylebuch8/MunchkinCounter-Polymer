@@ -4,7 +4,7 @@
 <link rel="import" href="../../bower_components/core-signals/core-signals.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="mc-player" attributes="player playerId" layout vertical>
+<polymer-element name="mc-player" attributes="player playerId gameId" layout vertical>
     <template>
         <style>
             :host {
@@ -37,7 +37,7 @@
             }
         </style>
 
-        <firebase-element id="base" location="https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/{{playerId}}" data="{{playa}}" keys="{{keys}}"></firebase-element>
+        <firebase-element id="base" location="https://munchkincounter.firebaseio.com/games/{{gameId}}/players/{{playerId}}" data="{{playa}}" keys="{{keys}}"></firebase-element>
 
         <div class="player" hero hero-id="punch" style="background-color: {{player.color}}" fit layout vertical center center-justified>
             <h1>{{player.name}}</h1>

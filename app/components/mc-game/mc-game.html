@@ -1,8 +1,9 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/core-signals/core-signals.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-element.html">
 
-<polymer-element name="mc-game" attributes="players player playerId" layout vertical>
+<polymer-element name="mc-game" attributes="players player playerId gameId" layout vertical>
     <template>
         <style>
             :host {
@@ -26,9 +27,15 @@
                 border-radius: 50%;
                 border: 5px solid white;
             }
+
+            button {
+                position: absolute;
+                right: 15px;
+                top: 15px;
+            }
         </style>
 
-        <firebase-element id="base" location="https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0" data="{{game}}"></firebase-element>
+        <firebase-element id="base" location="https://munchkincounter.firebaseio.com/games/{{gameId}}" data="{{game}}"></firebase-element>
 
         <core-selector on-core-select="{{playerSelected}}" fit layout horizontal>
             <template repeat="{{key in keys(game.players)}}">
@@ -39,6 +46,8 @@
                 </div>
             </template>
         </core-selector>
+
+        <button on-tap="{{goToSetup}}">Setup</button>
     </template>
 
     <script>
@@ -56,6 +65,10 @@
                     this.player = this.game.players[key];
                     this.playerId = key;
                 }
+            },
+
+            goToSetup: function () {
+                this.fire('setup');
             }
         });
     </script>

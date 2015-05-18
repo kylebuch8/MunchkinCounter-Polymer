@@ -18,44 +18,28 @@
 
         </style>
 
-        <core-animated-pages id="pages" transitions="hero-transition cross-fade cross-fade-delayed" selected="game">
-            <!-- <section name="home">
-                <mc-home layout vertical></mc-home>
-            </section>-->
-            <mc-setup name="setup"></mc-setup>
-            <mc-game name="game" players={{players}} player="{{player}}" playerId="{{playerId}}" on-core-activate="{{playerChanged}}"></mc-game>
-            <mc-player name="player" player="{{player}}" playerId="{{playerId}}"></mc-player>
+        <!-- <core-animated-pages id="pages" transitions="hero-transition cross-fade cross-fade-delayed" selected="{{selected}}"> -->
+        <core-animated-pages id="pages" selected="{{selected}}">
+            <mc-home name="home" gameId="{{gameId}}"></mc-home>
+            <mc-setup name="setup" gameId="{{gameId}}"></mc-setup>
+            <mc-game name="game" players={{players}} player="{{player}}" playerId="{{playerId}}" gameId="{{gameId}}" on-core-activate="{{playerChanged}}"></mc-game>
+            <mc-player name="player" player="{{player}}" playerId="{{playerId}}" gameId="{{gameId}}"></mc-player>
         </core-animated-pages>
     </template>
 
     <script>
         Polymer({
-            players: [
-                {
-                    name: 'Kyle',
-                    color: '#cc0000',
-                    level: 1
-                },
-                {
-                    name: 'Kristy',
-                    color: 'green',
-                    level: 1
-                },
-                {
-                    name: 'Cyrus',
-                    color: '#0854C7',
-                    level: 1
-                },
-                {
-                    name: 'Ramona',
-                    color: 'Purple',
-                    level: 1
-                }
-            ],
+            selected: 'home',
+
+            gameId: '-Jojuz5NFVv1a-mRiln0',
 
             eventDelegates: {
                 'main': function () {
                     this.$.pages.selected = 'game';
+                },
+
+                'setup': function () {
+                    this.$.pages.selected = 'setup';
                 }
             },
 
