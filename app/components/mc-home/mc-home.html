@@ -1,21 +1,32 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-signals/core-signals.html">
 
-<polymer-element name="mc-home">
+<polymer-element name="mc-home" attributes="gameId">
     <template>
-        <style>
-            :host {
-                display: block;
-                background-color: red;
-            }
-        </style>
         <h1>Home</h1>
 
-        <button on-tap="{{setUpGame}}">Setup</button>
+        <input type="text" value="{{gameId}}" placeholder="Game ID"> <button on-tap="{{goToGame}}">Go</button>
+
+        <div>
+            <button on-tap="{{createNewGame}}">Create New Game</button>
+        </div>
     </template>
     <script>
         Polymer({
-            setUpGame: function () {
+            goToGame: function () {
+                this.fire('main');
+            },
+
+            createNewGame: function () {
+                var gamesRef = new Firebase('https://munchkincounter.firebaseio.com/games'),
+                    game = {
+                        players: [],
+                        winningLevel: 10,
+                        createDate: Firebase.ServerValue.TIMESTAMP
+                    },
+                    newGameRef = gamesRef.push(game);
+
+                this.gameId = newGameRef.key();
                 this.fire('setup');
             }
         });

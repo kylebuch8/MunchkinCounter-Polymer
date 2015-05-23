@@ -56,7 +56,7 @@
                         name: this.name,
                         level: 1
                     },
-                    playersRef = new Firebase('https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/');
+                    playersRef = new Firebase('https://munchkincounter.firebaseio.com/games/' + this.gameId + '/players/');
 
                 playersRef.push(player);
 
@@ -65,7 +65,7 @@
 
             removePlayer: function (event) {
                 var key = event.target.templateInstance.model.key,
-                    playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/' + key);
+                    playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/' + this.gameId + '/players/' + key);
 
                 playerRef.remove();
             },
@@ -73,7 +73,7 @@
             updateColor: function (event) {
                 if (event.detail.isSelected) {
                     var key = event.target.templateInstance.model.key,
-                        playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/' + key);
+                        playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/' + this.gameId + '/players/' + key);
 
                     playerRef.update({
                         color: event.target.selected
@@ -84,7 +84,7 @@
             updateGender: function (event) {
                 if (event.detail.isSelected) {
                     var key = event.target.templateInstance.model.key,
-                        playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/-Jojuz5NFVv1a-mRiln0/players/' + key);
+                        playerRef = new Firebase('https://munchkincounter.firebaseio.com/games/' + this.gameId + '/players/' + key);
 
                     playerRef.update({
                         gender: event.target.selected
