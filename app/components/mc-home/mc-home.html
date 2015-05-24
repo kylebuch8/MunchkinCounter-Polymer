@@ -12,21 +12,26 @@
         </div>
     </template>
     <script>
+        function generateRandomId() {
+            return Math.random().toString(36).substr(2, 7);
+        }
+
         Polymer({
             goToGame: function () {
                 this.fire('main');
             },
 
             createNewGame: function () {
-                var gamesRef = new Firebase('https://munchkincounter.firebaseio.com/games'),
+                var id = generateRandomId(),
+                    gamesRef = new Firebase('https://munchkincounter.firebaseio.com/games/' + id),
                     game = {
                         players: [],
                         winningLevel: 10,
                         createDate: Firebase.ServerValue.TIMESTAMP
                     },
-                    newGameRef = gamesRef.push(game);
+                    newGameRef = gamesRef.set(game);
 
-                this.gameId = newGameRef.key();
+                this.gameId = id;
                 this.fire('setup');
             }
         });

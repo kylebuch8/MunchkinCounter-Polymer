@@ -13,6 +13,9 @@
         <firebase-element location="https://munchkincounter.firebaseio.com/games/{{gameId}}" data="{{game}}"></firebase-element>
 
         <h1>Setup</h1>
+        <div>
+            <h2>Game ID: {{gameId}}</h2>
+        </div>
         <input type="text" name="name" value="{{name}}"><button on-tap="{{addPlayer}}">Add</button>
         <ul>
             <template repeat="{{key in keys(game.players)}}">
