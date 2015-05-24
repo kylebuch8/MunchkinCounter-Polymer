@@ -20,6 +20,7 @@
     "core-signals": "Polymer/core-signals#~0.5.6",
     "firebase-element": "Polymer/firebase-element#~0.5.6",
     "paper-radio-button": "Polymer/paper-radio-button#~0.5.6",
-    "paper-radio-group": "Polymer/paper-radio-group#~0.5.6"
+    "paper-radio-group": "Polymer/paper-radio-group#~0.5.6",
+    "flatiron-director": "PolymerLabs/flatiron-director#~0.5.0"
   }
 }

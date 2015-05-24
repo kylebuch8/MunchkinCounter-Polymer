@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../bower_components/font-roboto/roboto.html">
+<link rel="import" href="../../bower_components/flatiron-director/flatiron-director.html">
 <link rel="import" href="../mc-home/mc-home.html">
 <link rel="import" href="../mc-setup/mc-setup.html">
 <link rel="import" href="../mc-game/mc-game.html">
@@ -18,26 +19,29 @@
 
         </style>
 
+        <!-- route controller -->
+        <flatiron-director route="{{route}}" autoHash></flatiron-director>
+
         <!-- <core-animated-pages id="pages" transitions="hero-transition cross-fade cross-fade-delayed" selected="{{selected}}"> -->
-        <core-animated-pages id="pages" selected="{{selected}}">
-            <mc-home name="home" gameId="{{gameId}}"></mc-home>
-            <mc-setup name="setup" gameId="{{gameId}}"></mc-setup>
-            <mc-game name="game" players={{players}} player="{{player}}" playerId="{{playerId}}" gameId="{{gameId}}" on-core-activate="{{playerChanged}}"></mc-game>
-            <mc-player name="player" player="{{player}}" playerId="{{playerId}}" gameId="{{gameId}}"></mc-player>
+        <core-animated-pages id="pages" selected="{{route}}" valueattr="hash">
+            <mc-home hash="home" gameId="{{gameId}}"></mc-home>
+            <mc-setup hash="setup/{{gameId}}" gameId="{{gameId}}"></mc-setup>
+            <mc-game hash="game/{{gameId}}" players={{players}} player="{{player}}" playerId="{{playerId}}" gameId="{{gameId}}" on-core-activate="{{playerChanged}}"></mc-game>
+            <mc-player hash="player/{{gameId}}" player="{{player}}" playerId="{{playerId}}" gameId="{{gameId}}"></mc-player>
         </core-animated-pages>
     </template>
 
     <script>
         Polymer({
-            selected: 'home',
-
             eventDelegates: {
                 'main': function () {
-                    this.$.pages.selected = 'game';
+                    //this.$.pages.selected = 'game';
+                    this.route = 'game/' + this.gameId;
                 },
 
                 'setup': function () {
-                    this.$.pages.selected = 'setup';
+                    //this.$.pages.selected = 'setup';
+                    this.route = 'setup/' + this.gameId;
                 }
             },
 
@@ -47,6 +51,10 @@
                 } else {
                     this.$.pages.selected = 'game';
                 }
+            },
+
+            ready: function () {
+                this.route = this.route || 'home';
             }
         });
     </script>
